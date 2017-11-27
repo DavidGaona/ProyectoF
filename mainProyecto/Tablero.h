@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Coordenadas.h"
 #include <random>
+#include "Timer.h"
 
 
 class Tablero
@@ -20,22 +21,26 @@ public:
 	void DescongelarCajas();
 	void AddScore(Caja & caja);
 	void ReAcomodarTablero();
-	void SetToZero();
 	void QuitarLiberable();
 	void RevizaPokebola();
+	void SetLevel(int lvl);
 	bool HayCajasLiberables();
 	bool HayJugadasPosibles();
-	int* MostrarScores() const;
+	bool TerminaJuego() const;
+	int MostrarScores(int type) const;
 	Caja BuscarCaja(int columna, int fila);
 	int BuscarCajaGuardar(int j, int i);
-	bool EstaEntre(int limiteInferior, int limiteSuperior, int numero);
+	bool EstaEntre(int limiteInferior, int limiteSuperior, int numero); 
+	
 	
 
 protected:
 
 private:
 	Caja matriz[7][7];
+	Timer contador;
 	std::mt19937 rng;
+	//int contenedor[12];
 	int numEvoluciones = 0;
 	int numPokemon = 0;
 	int scoreTotal = 0;

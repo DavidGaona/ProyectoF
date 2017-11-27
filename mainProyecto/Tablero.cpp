@@ -622,45 +622,81 @@ void Tablero::AddScore(Caja & caja)
 	int tipo = caja.GetPokemon();
 	switch (tipo)
 	{
+	case 0:
+		if (pokebola > 0)
+		{
+			--pokebola;
+		}
+		break;
 	case 1:
-		++mew; 
+		if (mew > 0)
+		{
+			--mew;
+		} 
 		scoreTotal = scoreTotal + puntaje; 
 		break;
 
 	case 2:
-		++mew2;
+		if (mew2 > 0)
+		{
+			--mew2;
+		}
 		scoreTotal = scoreTotal + puntaje;
 		break;
 
 	case 3:
-		++pikachu;
+		if (pikachu > 0)
+		{
+			--pikachu;
+		}
 		scoreTotal = scoreTotal + puntaje;
 		break;
 
 	case 4:
-		++raichu;
+		if (raichu > 0)
+		{
+			--raichu;
+		};
 		scoreTotal = scoreTotal + puntaje;
 		break;					  
 								  
 	case 5:						  
-		++kirlia;				  
+		if (kirlia > 0)
+		{
+			--kirlia;
+		}
+					  
 		scoreTotal = scoreTotal + puntaje;
 		break;					  
 								  
-	case 6:						  
-		++gardevoir;			  
+	case 6:	
+		if (gardevoir > 0)
+		{
+			--gardevoir;
+		}
+					  
 		scoreTotal = scoreTotal + puntaje;
 		break;					  
 								  
-	case 7:						  
-		++staravia;				  
+	case 7:				
+
+		if (staravia > 0)
+		{
+			--staravia;
+		}				  
 		scoreTotal = scoreTotal + puntaje;
 		break;					  
 								  
-	case 8:						  
-		++staraptor;			  
+	case 8:			
+
+		if (staraptor > 0)
+		{
+			--staraptor;
+		}	  
 		scoreTotal = scoreTotal + puntaje;
 		break;
+
+
 
 	} 
 	numPokemon = mew + mew2 + pikachu + raichu + kirlia + gardevoir + staravia + staraptor;
@@ -676,27 +712,6 @@ void Tablero::ReAcomodarTablero()
 			matriz[i][j].AsignarPos(j + 1, i + 1);				// pos.x = columnas = j
 		}														// pos.y = filas = i
 	}
-}
-
-void Tablero::SetToZero()
-{
-	numEvoluciones = 0;
-	numPokemon = 0;
-	scoreTotal = 0;
-
-	mew = 0;
-	mew2 = 0;
-
-	pikachu = 0;
-	raichu = 0;
-
-	kirlia = 0;
-	gardevoir = 0;
-
-	staravia = 0;
-	staraptor = 0;
-
-	pokebola = 0;
 }
 
 void Tablero::QuitarLiberable()
@@ -856,6 +871,50 @@ void Tablero::RevizaPokebola()
 	}
 }
 
+void Tablero::SetLevel(int lvl)
+{
+	if (lvl == 1)
+	{
+		numPokemon = 20;
+
+		mew = 3;
+		mew2 = 2;
+
+		pikachu = 3;
+		raichu = 2;
+
+		kirlia = 3;
+		gardevoir = 2;
+
+		staravia = 3;
+		staraptor = 2;
+
+		pokebola = 1;
+	}
+	else if (lvl == 2)
+	{
+		numPokemon = 4000;
+
+		mew = 600;
+		mew2 = 4;
+
+		pikachu = 6;
+		raichu = 4;
+
+		kirlia = 6;
+		gardevoir = 4;
+
+		staravia = 6;
+		staraptor = 4;
+
+		pokebola = 2;
+	}
+	else
+	{
+		//elsa capuntas
+	}
+}
+
 bool Tablero::HayCajasLiberables() 
 {
 	for (int i = 0; i < 7; ++i)
@@ -933,64 +992,74 @@ bool Tablero::HayJugadasPosibles()
 	return false;
 }
 
-
-int * Tablero::MostrarScores() const
+bool Tablero::TerminaJuego() const					//Reviza si termina el juego
 {
-	int matriz[12];
+	return (((mew <= 0) && (mew2 <= 0) &&
+		(pikachu <= 0) && (raichu <= 0) &&
+		(kirlia <= 0) && (gardevoir <= 0) &&
+		(staravia <= 0) && (staraptor <= 0) &&
+		(pokebola <= 0)) ||
+		(numPokemon <= 0));
+}
+
+
+int Tablero::MostrarScores(int type) const
+{
+	int arreglo[12];
 	for (int i = 0; i < 12; ++i)
 	{
 		switch (i)
 		{
 		case 0:
-			matriz[0] = numEvoluciones;
+			arreglo[0] = numEvoluciones;
 			break;
 
 		case 1:
-			matriz[1] = numPokemon;
+			arreglo[1] = numPokemon;
 			break;
 
 		case 2:
-			matriz[2] = scoreTotal;
+			arreglo[2] = scoreTotal;
 			break;
 
 		case 3:
-			matriz[3] = mew;
+			arreglo[3] = mew;
 			break;
 
 		case 4:
-			matriz[4] = mew2;
+			arreglo[4] = mew2;
 			break;
 
 		case 5:
-			matriz[5] = pikachu;
+			arreglo[5] = pikachu;
 			break;
 
 		case 6:
-			matriz[6] = raichu;
+			arreglo[6] = raichu;
 			break;
 
 		case 7:
-			matriz[7] = kirlia;
+			arreglo[7] = kirlia;
 			break;
 
 		case 8:
-			matriz[8] = gardevoir;
+			arreglo[8] = gardevoir;
 			break;
 
 		case 9:
-			matriz[9] = staravia;
+			arreglo[9] = staravia;
 			break;
 
 		case 10:
-			matriz[10] = staraptor;
+			arreglo[10] = staraptor;
 			break;
 
 		case 11:
-			matriz[11] = pokebola;
+			arreglo[11] = pokebola;
 			break;
 		}
 	}
-	return matriz;
+	return arreglo[type];
 }
 
 Caja Tablero::BuscarCaja(int columna, int fila)

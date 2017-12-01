@@ -915,6 +915,21 @@ void Tablero::SetLevel(int lvl)
 	}
 }
 
+void Tablero::SetScores(int pokemons[13])
+{
+	scoreTotal = pokemons[2];
+	numPokemon = pokemons[3];
+	mew = pokemons[4];
+	mew2 = pokemons[5];
+	pikachu = pokemons[6];
+	raichu = pokemons[7];
+	kirlia = pokemons[8];
+	gardevoir = pokemons[9];
+	staravia = pokemons[10];
+	staraptor = pokemons[11];
+	pokebola = pokemons[12];
+}
+
 bool Tablero::HayCajasLiberables() 
 {
 	for (int i = 0; i < 7; ++i)
@@ -1093,6 +1108,11 @@ bool Tablero::EstaEntre(int limiteInferior, int limiteSuperior, int numero)
 	{
 		return false;
 	}
+}
+
+Timer Tablero::DarTiempo()
+{
+	return contador;
 }
 
 

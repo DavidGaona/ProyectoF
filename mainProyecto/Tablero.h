@@ -24,6 +24,7 @@ public:
 	void QuitarLiberable();
 	void RevizaPokebola();
 	void SetLevel(int lvl);
+	void SetScores(int pokemons[13]);
 	bool HayCajasLiberables();
 	bool HayJugadasPosibles();
 	bool TerminaJuego() const;
@@ -31,7 +32,7 @@ public:
 	Caja BuscarCaja(int columna, int fila);
 	int BuscarCajaGuardar(int j, int i);
 	bool EstaEntre(int limiteInferior, int limiteSuperior, int numero); 
-	
+	Timer DarTiempo();
 	
 
 protected:
